@@ -11,9 +11,13 @@ A database-driven web application built with pure PHP and MySQL (PDO + OOP) impl
 
 ```
 php_assignment1/
+├── .env                    ← Local environment variables (DB credentials) — NOT committed to git
+├── .env.example            ← Template showing required variables — committed to git
+├── .gitignore              ← Excludes .env from version control
 ├── schema.sql              ← Run this once in MySQL to create the database and table
 ├── config/
-│   └── Database.php        ← Singleton PDO connection class
+│   ├── env.php             ← Lightweight .env file loader (no external libraries)
+│   └── Database.php        ← Singleton PDO connection class (reads from $_ENV)
 ├── models/
 │   └── Student.php         ← Student model with all CRUD query methods (OOP)
 ├── includes/
@@ -60,15 +64,23 @@ Or paste the file contents directly into the phpMyAdmin SQL tab.
 
 ### 3. Configure the database connection
 
-Open `config/Database.php` and update the credentials to match your environment:
+Copy `.env.example` to `.env` and fill in your MySQL credentials:
 
-```php
-private string $host   = 'localhost';
-private string $dbName = 'student_management';
-private string $user   = 'root';
-private string $pass   = '';   // ← set your MySQL password here
-private string $port   = '3306';
+```bash
+cp .env.example .env
 ```
+
+Then edit `.env`:
+
+```env
+DB_HOST=localhost
+DB_PORT=3306
+DB_NAME=student_management
+DB_USER=root
+DB_PASS=your_password_here
+```
+
+> `.env` is listed in `.gitignore` and will never be committed to version control.
 
 ### 4. Open the application
 
