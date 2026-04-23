@@ -6,7 +6,7 @@ require_once __DIR__ . '/models/Student.php';
 $pageTitle = 'Add Student';
 $cssPath   = 'assets/style.css';
 
-// Generate CSRF token once per session
+
 if (empty($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
@@ -23,7 +23,7 @@ $data   = [
 ];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // CSRF check
+    
     if (!hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'] ?? '')) {
         http_response_code(403);
         die('Invalid CSRF token.');
