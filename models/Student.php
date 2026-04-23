@@ -36,8 +36,8 @@ class Student
     public function create(array $data): int
     {
         $sql = '
-            INSERT INTO students (student_no, first_name, last_name, email, course, year_of_study, gpa)
-            VALUES (:student_no, :first_name, :last_name, :email, :course, :year_of_study, :gpa)
+            INSERT INTO students (student_no, first_name, last_name, email, course, year_of_study)
+            VALUES (:student_no, :first_name, :last_name, :email, :course, :year_of_study)
         ';
         $stmt = $this->db->prepare($sql);
         $stmt->execute([
@@ -47,7 +47,6 @@ class Student
             ':email'         => $data['email'],
             ':course'        => $data['course'],
             ':year_of_study' => $data['year_of_study'],
-            ':gpa'           => $data['gpa'] !== '' ? $data['gpa'] : null,
         ]);
         return (int) $this->db->lastInsertId();
     }
@@ -65,8 +64,7 @@ class Student
                 last_name     = :last_name,
                 email         = :email,
                 course        = :course,
-                year_of_study = :year_of_study,
-                gpa           = :gpa
+                year_of_study = :year_of_study
             WHERE id = :id
         ';
         $stmt = $this->db->prepare($sql);
@@ -77,7 +75,6 @@ class Student
             ':email'         => $data['email'],
             ':course'        => $data['course'],
             ':year_of_study' => $data['year_of_study'],
-            ':gpa'           => $data['gpa'] !== '' ? $data['gpa'] : null,
             ':id'            => $id,
         ]);
         return $stmt->rowCount() === 1;

@@ -19,7 +19,6 @@ $data   = [
     'email'         => '',
     'course'        => '',
     'year_of_study' => '',
-    'gpa'           => '',
 ];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -126,17 +125,6 @@ include __DIR__ . '/includes/header.php';
                    maxlength="100" required>
             <?php if (isset($errors['course'])): ?>
                 <span class="field-error"><?= e($errors['course']) ?></span>
-            <?php endif; ?>
-        </div>
-
-        <div class="form-group" style="max-width:160px">
-            <label for="gpa">GPA (0.00 – 4.00)</label>
-            <input type="number" id="gpa" name="gpa"
-                   value="<?= e($data['gpa']) ?>"
-                   class="<?= isset($errors['gpa']) ? 'is-invalid' : '' ?>"
-                   min="0" max="4" step="0.01" placeholder="Optional">
-            <?php if (isset($errors['gpa'])): ?>
-                <span class="field-error"><?= e($errors['gpa']) ?></span>
             <?php endif; ?>
         </div>
 

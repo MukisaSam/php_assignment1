@@ -132,17 +132,6 @@ include __DIR__ . '/includes/header.php';
             <?php endif; ?>
         </div>
 
-        <div class="form-group" style="max-width:160px">
-            <label for="gpa">GPA (0.00 – 4.00)</label>
-            <input type="number" id="gpa" name="gpa"
-                   value="<?= e($data['gpa'] ?? '') ?>"
-                   class="<?= isset($errors['gpa']) ? 'is-invalid' : '' ?>"
-                   min="0" max="4" step="0.01" placeholder="Optional">
-            <?php if (isset($errors['gpa'])): ?>
-                <span class="field-error"><?= e($errors['gpa']) ?></span>
-            <?php endif; ?>
-        </div>
-
         <div class="form-actions">
             <button type="submit" class="btn btn-primary">Update Student</button>
             <a href="index.php" class="btn btn-secondary">Cancel</a>

@@ -22,7 +22,6 @@ function validateStudentForm(array $post, int $excludeId = 0): array
     $email       = trim($post['email']        ?? '');
     $course      = trim($post['course']       ?? '');
     $yearRaw     = $post['year_of_study']     ?? '';
-    $gpaRaw      = trim($post['gpa']          ?? '');
 
     if ($studentNo === '') {
         $errors['student_no'] = 'Student number is required.';
@@ -64,15 +63,6 @@ function validateStudentForm(array $post, int $excludeId = 0): array
         $year = '';
     }
 
-    $gpa = null;
-    if ($gpaRaw !== '') {
-        $gpa = filter_var($gpaRaw, FILTER_VALIDATE_FLOAT);
-        if ($gpa === false || $gpa < 0.0 || $gpa > 4.0) {
-            $errors['gpa'] = 'GPA must be a number between 0.00 and 4.00 (leave blank if unknown).';
-            $gpa = $gpaRaw;
-        }
-    }
-
     return [
         'data' => [
             'student_no'    => $studentNo,
@@ -81,7 +71,6 @@ function validateStudentForm(array $post, int $excludeId = 0): array
             'email'         => $email,
             'course'        => $course,
             'year_of_study' => $year,
-            'gpa'           => $gpa !== null ? $gpa : '',
         ],
         'errors' => $errors,
     ];

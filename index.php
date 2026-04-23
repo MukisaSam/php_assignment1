@@ -41,7 +41,6 @@ include __DIR__ . '/includes/header.php';
                 <th>Email</th>
                 <th>Course</th>
                 <th>Year</th>
-                <th>GPA</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -59,7 +58,6 @@ include __DIR__ . '/includes/header.php';
                 <td><?= e($s['email']) ?></td>
                 <td><?= e($s['course']) ?></td>
                 <td><?= e($s['year_of_study']) ?></td>
-                <td><?= $s['gpa'] !== null ? e(number_format((float)$s['gpa'], 2)) : '&mdash;' ?></td>
                 <td>
                     <div class="btn-group">
                         <a href="edit.php?id=<?= $s['id'] ?>" class="btn btn-warning">Edit</a>
